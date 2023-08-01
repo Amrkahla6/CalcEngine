@@ -32,10 +32,10 @@ public class Main {
     static void performCalculation()
     {
         MathEquation [] equations = new MathEquation[4];
-        equations[0] = new MathEquation('d',100.0d,50.0d);
-        equations[1] = new MathEquation('a',25.0d,92.0d);
-        equations[2] = new MathEquation('s',225.0d,17.0d);
-        equations[3] = new MathEquation('m',11.0d,3.0d);
+        equations[0] = new MathEquation(MathOperation.DIVIDE,100.0d,50.0d);
+        equations[1] = new MathEquation(MathOperation.ADD,25.0d,92.0d);
+        equations[2] = new MathEquation(MathOperation.SUBTRACT,225.0d,17.0d);
+        equations[3] = new MathEquation(MathOperation.MULTIPLY,11.0d,3.0d);
 
 
         for (MathEquation equation : equations)
@@ -54,7 +54,7 @@ public class Main {
         System.out.println();
         System.out.println("Using execute overload");
 
-        MathEquation equationOverload = new MathEquation('d');
+        MathEquation equationOverload = new MathEquation(MathOperation.DIVIDE);
 
         double leftDouble  = 9.0d;
         double rightDouble = 4.0d;
@@ -86,7 +86,7 @@ public class Main {
     }
 
     private static void performOperation(String[] parts) {
-        char opCode       = opCodeFromString(parts[0]);
+        MathOperation opCode       = MathOperation.valueOf(parts[0].toUpperCase());
         double letVal   = valueFromWord(parts[1]);
         double rightVal = valueFromWord(parts[2]);
         MathEquation equation = new MathEquation(opCode,letVal,rightVal);

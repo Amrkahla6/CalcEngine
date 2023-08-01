@@ -1,10 +1,10 @@
 package com.pluralsight.calcengine;
 
 public class MathEquation {
-    double leftVal;
-    double rightVal;
-    char opCode;
-    double result;
+    private double leftVal;
+    private double rightVal;
+    private MathOperation opCode;
+    private double result;
 
     public static int numberOfCalculations;
 
@@ -12,11 +12,11 @@ public class MathEquation {
 
     public MathEquation() {}
 
-    public MathEquation(char opCode) {
+    public MathEquation(MathOperation opCode) {
         this.opCode = opCode;
     }
 
-    public MathEquation(char opCode, double leftVal, double rightVal) {
+    public MathEquation(MathOperation opCode, double leftVal, double rightVal) {
         this(opCode);
         this.leftVal = leftVal;
         this.rightVal = rightVal;
@@ -26,16 +26,16 @@ public class MathEquation {
     {
         switch (opCode)
         {
-            case 'a':
+            case ADD:
                 result = leftVal + rightVal;
                 break;
-            case 's':
+            case SUBTRACT:
                 result = leftVal - rightVal;
                 break;
-            case 'm':
+            case MULTIPLY:
                 result = leftVal * rightVal;
                 break;
-            case 'd':
+            case DIVIDE:
                 result = leftVal / rightVal;
                 break;
             default:
@@ -48,7 +48,7 @@ public class MathEquation {
 
     public String toString()
     {
-        char symbol = symbolFromOpCode();
+        char symbol = opCode.getSymbol();
         StringBuilder builder = new StringBuilder(20);
         builder.append(leftVal);
         builder.append(" ");
@@ -59,23 +59,23 @@ public class MathEquation {
         builder.append(result);
         return builder.toString();
     }
-    public char symbolFromOpCode()
-    {
-        char [] opCodes   = {'d','a','s','m'};
-        char [] symbols   = {'-','+','*','/'};
-
-        char symbol = ' ';
-
-        for (int index = 0; index < opCodes.length; index ++)
-        {
-            if (opCode == opCodes[index])
-            {
-                symbol = symbols[index];
-                break;
-            }
-        }
-        return symbol;
-    }
+//    public char symbolFromOpCode()
+//    {
+//        char [] opCodes   = {'d','a','s','m'};
+//        char [] symbols   = {'-','+','*','/'};
+//
+//        char symbol = ' ';
+//
+//        for (int index = 0; index < opCodes.length; index ++)
+//        {
+//            if (opCode == opCodes[index])
+//            {
+//                symbol = symbols[index];
+//                break;
+//            }
+//        }
+//        return symbol;
+//    }
 
     public void execute(double leftVal, double rightVal){
         this.leftVal  = leftVal;
@@ -111,11 +111,11 @@ public class MathEquation {
         this.rightVal = rightVal;
     }
 
-    public char getOpCode() {
+    public MathOperation getOpCode() {
         return opCode;
     }
 
-    public void setOpCode(char opCode) {
+    public void setOpCode(MathOperation opCode) {
         this.opCode = opCode;
     }
 
